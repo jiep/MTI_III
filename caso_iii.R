@@ -24,9 +24,9 @@ plot(density(samples), xaxt='n', ann=FALSE, yaxt='n', xlab=, ylab=, main = ,xlim
 par(new = TRUE)
 curve(dbeta(x,alpha, beta), ann=FALSE, yaxt='n', xlab=, ylab=, xlim = c(0,1), ylim = c(0,6), col=4)
 par(new = TRUE)
-curve(dbeta(x,alpha_post, beta_post), xlim = c(0,1), ylim = c(0,6), col=6)
+curve(dbeta(x,alpha_post, beta_post), xlim = c(0,1), ylim = c(0,6), col=6, xlab = expression(pi), ylab = "Densidad", main="Función de densidad de la distribución empírica, a priori y a posteriori")
 par(new = FALSE)
-legend(x= "topleft", y=0.2,legend = c("Empírica", "A priori", "A posteriori"), col = c(2,4,6),  lty=1:2, cex=0.8,
+legend(x= "topleft", y=0.2,legend = c("Empírica", "A priori", "A posteriori"), col = c(2,4,6),  lty=1, cex=0.8,
   box.lty=0)
 
 # Calculamos la media y desviación típica a posteriori
@@ -53,9 +53,14 @@ x1 <- 1 - pbeta(0.4, alpha_post, beta_post)
 # la Educación Secundaria
 
 k <- 9 # 9 niños acaban la Educación Secundaria
-m <-10 # de 10  
-probability <- 1 - choose(m, k) * (gamma(alpha + beta + n)/(gamma(alpha + x)*gamma(beta + n - x)))*(gamma(alpha + x + k)*gamma(beta + n - x + m - k)/gamma(alpha + beta + m + n))  
-
+m <-10 # de 10
+sum <- 0
+for(k in 0:m){
+  probability <- choose(m, k) * (gamma(alpha + beta + n)/(gamma(alpha + x)*gamma(beta + n - x)))*(gamma(alpha + x + k)*gamma(beta + n - x + m - k)/gamma(alpha + beta + m + n))  
+  sum <- sum + probability
+  cat(paste("Probabilidad: ", probability, "\n"))
+  cat(paste("Total: ", sum, "\n"))
+}
 
 #------------------------------------------------------------------------------
 # Tarea IV
