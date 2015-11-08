@@ -45,7 +45,7 @@
 \pagenumbering{alph}
 \setcounter{page}{1}
 
-\portada{Caso Práctico III}{Modelización y tratamiento de la incertidumbre}{Inferencia}{José Ignacio Escribano}{Móstoles}
+\portada{Caso Práctico III}{Modelización y tratamiento de la incertidumbre}{Inferencia bayesiana}{José Ignacio Escribano}{Móstoles}
 
 \listoffigures
 \thispagestyle{empty}
@@ -106,7 +106,7 @@ f(p|x) & \propto f(p) \cdot \mathcal{L}(p) \\ & \propto 1 \cdot p^{22}(1-p)^{7} 
 
 Comparando con la definición de función de densidad de una distribución beta, tenemos que la distribución a posteriori $p|x \sim \mathcal{B}e(23,8)$.\\
 
-La Figura~\ref{fig:distribuciones_beta} muestra las distribuciones a priori, a posteriori y la distribución empírica. Ésta última se ha generado generando con 1000 muestras de una distribución $\mathcal{B}e(23,8)$ (nuestra distribución a posteriori) con el comando \texttt{rbeta} de R. Tanto la distribución a posteriori como la distribución empírica son bastante parecidas, por lo que el comando \texttt{rbeta} de R aproxima bien la función aún cunado el número de muestras es relativamente pequeño.\\
+La Figura~\ref{fig:distribuciones_beta} muestra las distribuciones a priori, a posteriori y la distribución empírica. Ésta última se ha generado generando con 1000 muestras de una distribución $\mathcal{B}e(23,8)$ (nuestra distribución a posteriori) con el comando \texttt{rbeta} de R. Tanto la distribución a posteriori como la distribución empírica son bastante parecidas, por lo que el comando \texttt{rbeta} de R aproxima bien la función aún cuando el número de muestras es relativamente pequeño.\\
 
 \begin{figure}[tbph!]
 \centering
@@ -290,7 +290,7 @@ f(\mu | y) & \propto f(\mu) \mathcal{L}(\mu) \\ & \propto \exp \left[ -\dfrac{1}
 
 Por tanto, $p|y \sim \mathcal{N}\left(\dfrac{\dfrac{\mu_0}{\sigma_0^2} + \dfrac{n \bar{y}}{\sigma^2}}{\dfrac{1}{\sigma_0^2} + \dfrac{n}{\sigma^2}}, \sqrt{\left( \dfrac{1}{\sigma_0^2} + \dfrac{n}{\sigma^2} \right)^{-1}}\right)$.\\
 
-Sustitiyendo, en la formula anterior se tiene que $p|y \sim \mathcal{N}(48.9625, 2.5)$. La Figura~\ref{} muestra las funciones de densidad de las distribuciones a priori y a posteriori.\\
+Sustituyendo, en la fórmula anterior se tiene que $p|y \sim \mathcal{N}(48.9625, 2.5)$. La Figura~\ref{distribucion_posteriori_normal_normal} muestra las funciones de densidad de las distribuciones a priori y a posteriori.\\
 
 \begin{figure}[tbph!]
 \centering
@@ -310,12 +310,12 @@ Para calcular el intervalo de probabilidad al 80\% para $\mu$ usamos el comando 
 
 \section{Conclusiones}
 
-En este caso práctico hemos visto dos modelos clásicos de inferencia bayesiana: el modelo beta-binomial y el modelo normal-normal. Hemos puesto en práctica toda la teoría de ambos modelos para calcular probabilidades sobre la distribución a posteriori, intervalos de probabilidad, contrastes de hipótesis, etc. Para calcular todo lo anterior nos hemos del poderoso software estadístico R, que nos ha ahorrado mucho tiempo evitando realizar cálculos tediosos manualmente. 
+En este caso práctico hemos visto dos modelos clásicos de inferencia bayesiana: el modelo beta-binomial y el modelo normal-normal. Hemos puesto en práctica toda la teoría de ambos modelos para calcular probabilidades sobre la distribución a posteriori, intervalos de probabilidad, contrastes de hipótesis, etc. Para calcular todo lo anterior hemos hecho uso del poderoso software estadístico R, que nos ha ahorrado mucho tiempo evitando realizar cálculos tediosos manualmente. 
 
 \newpage
 
 \section{Código R}
-
+1
 \verbatiminput{../caso_iii.R}
 
 

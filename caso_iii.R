@@ -1,4 +1,4 @@
-#------------------------------------------------------------------------------
+﻿#------------------------------------------------------------------------------
 # Tarea III
 #------------------------------------------------------------------------------
 
@@ -20,18 +20,24 @@ samples <- rbeta(1000, alpha_post, beta_post)
 
 # Representamos la densidad empírica, la densidad a priori y la densidad a 
 # posteriori
-plot(density(samples), xaxt='n', ann=FALSE, yaxt='n', xlab=, ylab=, main = ,xlim = c(0,1), ylim = c(0,6), col=2)
+plot(density(samples), xaxt='n', ann=FALSE, yaxt='n', xlab=, ylab=, 
+  main = ,xlim = c(0,1), ylim = c(0,6), col=2)
 par(new = TRUE)
-curve(dbeta(x,alpha, beta), ann=FALSE, yaxt='n', xlab=, ylab=, xlim = c(0,1), ylim = c(0,6), col=4)
+curve(dbeta(x,alpha, beta), ann=FALSE, yaxt='n', xlab=, ylab=, 
+  xlim = c(0,1), ylim = c(0,6), col=4)
 par(new = TRUE)
-curve(dbeta(x,alpha_post, beta_post), xlim = c(0,1), ylim = c(0,6), col=6, xlab = expression(pi), ylab = "Densidad", main="Función de densidad de la distribución empírica, a priori y a posteriori")
+curve(dbeta(x,alpha_post, beta_post), xlim = c(0,1), ylim = c(0,6), col=6, 
+  xlab = expression(pi), ylab = "Densidad", 
+  main="Función de densidad de la distribución empírica, a priori 
+    y a posteriori")
 par(new = FALSE)
-legend(x= "topleft", y=0.2,legend = c("Empírica", "A priori", "A posteriori"), col = c(2,4,6),  lty=1, cex=0.8,
-  box.lty=0)
+legend(x= "topleft", y=0.2,legend = c("Empírica", "A priori", "A posteriori"), 
+  col = c(2,4,6),  lty=1, cex=0.8, box.lty=0)
 
 # Calculamos la media y desviación típica a posteriori
 post.mean <- (alpha + x)/(alpha + beta + n)
-post.var <- ((x + alpha)*(n - x + beta))/((alpha + beta  + n)^2*(alpha + beta + n + 1))
+post.var <- ((x + alpha)*(n - x + beta))
+  /((alpha + beta  + n)^2*(alpha + beta + n + 1))
 post.sd <- sqrt(post.var)
 
 # Calculamos un intervalo de probabilidad al 90% para p
@@ -42,8 +48,12 @@ alpha_level <- (1- percentage)/2
 lcb <- qbeta(alpha_level, alpha_post, beta_post)
 ucb <- qbeta(1 - alpha_level, alpha_post, beta_post)
 
-# Representamos el intervalo de probabilidad junto con la distribución a posteriori
-curve(dbeta(x,alpha_post, beta_post), xlim = c(0,1), ylim = c(0,6), col=6, xlab = expression(pi), ylab = "Densidad", main="Intervalo de probabilidad al 90 % sobre la distribución a posteriori")
+# Representamos el intervalo de probabilidad junto con la distribución 
+# a posteriori
+curve(dbeta(x,alpha_post, beta_post), xlim = c(0,1), ylim = c(0,6), 
+  col=6, xlab = expression(pi), ylab = "Densidad", 
+  main="Intervalo de probabilidad al 90 % sobre la distribución 
+    a posteriori")
 
 cords2.x <- c(lcb, seq(lcb, ucb, 0.01), ucb)
 cords2.y <- c(0, dbeta(seq(lcb, ucb, 0.01), alpha_post, beta_post), 0)
@@ -57,8 +67,8 @@ abline(h=0)
 x0 <- pbeta(0.4, alpha_post, beta_post) 
 x1 <- 1 - pbeta(0.4, alpha_post, beta_post) 
 
-# Calculamos la probabilidad predictiva de que al menos 9 de los 10 niños terminen 
-# la Educación Secundaria
+# Calculamos la probabilidad predictiva de que al menos 9 de los 10 niños 
+# terminen la Educación Secundaria
 
 k <- 9 # 9 niños acaban la Educación Secundaria
 m <-10 # de 10
@@ -66,12 +76,16 @@ sum <- 0
 x <- seq(0,m)
 y <- c(rep(0, m+1))
 for(k in 0:m){
-  probability <- choose(m, k) * (gamma(alpha + beta + n)/(gamma(alpha + x)*gamma(beta + n - x)))*(gamma(alpha + x + k)*gamma(beta + n - x + m - k)/gamma(alpha + beta + m + n))  
+  probability <- choose(m, k) * (gamma(alpha + beta + n)/
+    (gamma(alpha + x)*gamma(beta + n - x)))*(gamma(alpha + x + k)*
+    gamma(beta + n - x + m - k)/gamma(alpha + beta + m + n))  
   y[k] = probability
 }
 
 # Representamos la función de densidad de la distribución predictiva
-plot(x,y, main = "Función de densidad de la distribución predictiva", xlab = "Número de éxitos de 10 posibles", ylab = "Densidad", col = 2, type = "o")
+plot(x,y, main = "Función de densidad de la distribución predictiva", 
+  xlab = "Número de éxitos de 10 posibles", ylab = "Densidad", col = 2, 
+  type = "o")
 
 #------------------------------------------------------------------------------
 # Tarea IV
@@ -88,7 +102,9 @@ y <- c(38.6, 42.4, 57.5, 40.5, 51.7, 67.1, 33.4, 60.9, 64.1, 40.1, 40.7, 6.4)
 sigma <- 10
 
 # Representamos la función de densidad de la distribución a priori
-plot(mu, g_mu, col = 2, main = "Función de densidad de la distribución a priori", xlab = "Total anual de precipitaciones en forma de nieve (en cm)", ylab = "Densidad", type = "h")
+plot(mu, g_mu, col = 2, main = "Función de densidad de la distribución a priori", 
+  xlab = "Total anual de precipitaciones en forma de nieve (en cm)", 
+  ylab = "Densidad", type = "h")
 
 # Calculamos la verosimiltud para cada uno de los valores de mu
 
@@ -117,9 +133,11 @@ post <- likelihood*g_mu # Sin normalizar
 post <- post/sum(post) # Normalizada
 
 # Representamos la distribución a posteriori
-plot(mu, post, main="Distribución a posteriori", xlab=expression(mu), ylab="Densidad", type = "p", col = 2)
+plot(mu, post, main="Distribución a posteriori", xlab=expression(mu), 
+  ylab="Densidad", type = "p", col = 2)
 par(new = TRUE)
-plot(mu, post, main="Distribución a posteriori", xlab=expression(mu), ylab="Densidad", type = "h", col = 2)
+plot(mu, post, main="Distribución a posteriori", xlab=expression(mu), 
+  ylab="Densidad", type = "h", col = 2)
 
 # Calculamos el intervalo de probabilidad al 80%
 
@@ -140,12 +158,15 @@ var_post <- (1/sigma0^2 + n/sigma^2)^-1
 sd_post <- sqrt(var_post)
 
 # Representamos las distribuciones a priori y posteriori
-curve(xlim=c(30,90),dnorm(x,mu0, sigma0), ann=FALSE, yaxt='n', xlab=, ylab=, ylim = c(0,0.18), col=4)
+curve(xlim=c(30,90),dnorm(x,mu0, sigma0), ann=FALSE, yaxt='n', xlab=, 
+  ylab=, ylim = c(0,0.18), col=4)
 par(new = TRUE)
-curve(xlim=c(30,90),dnorm(x,mu_post, sd_post), ylim = c(0,0.18), col=6, xlab = expression(mu), ylab = "Densidad", main="Función de densidad de la distribución a priori y a posteriori")
+curve(xlim=c(30,90),dnorm(x,mu_post, sd_post), ylim = c(0,0.18), col=6, 
+  xlab = expression(mu), ylab = "Densidad", main="Función de densidad de 
+    la distribución a priori y a posteriori")
 par(new = FALSE)
-legend(x= "topleft", y=0.2,legend = c("A priori", "A posteriori"), col = c(4,6),  lty=1, cex=0.8,
-       box.lty=0)
+legend(x= "topleft", y=0.2,legend = c("A priori", "A posteriori"), 
+  col = c(4,6),  lty=1, cex=0.8, box.lty=0)
 
 
 # Calculamos un intervalo de probabilidad al 80% para mu
@@ -156,8 +177,11 @@ alpha_level <- (1 - percentage)/2
 lcb <- qnorm(alpha_level, mu_post, sd_post)
 ucb <- qnorm(1 - alpha_level, mu_post, sd_post)
 
-# Representamos el intervalo de probabilidad junto con la distribución a posteriori
-curve(dnorm(x,mu_post, sd_post), xlim = c(30,90), ylim = c(0,0.18), col=6, xlab = expression(mu), ylab = "Densidad", main="Intervalo de probabilidad al 80 % sobre la distribución a posteriori")
+# Representamos el intervalo de probabilidad junto con la 
+# distribución a posteriori
+curve(dnorm(x,mu_post, sd_post), xlim = c(30,90), ylim = c(0,0.18), 
+  col=6, xlab = expression(mu), ylab = "Densidad", 
+  main="Intervalo de probabilidad al 80 % sobre la distribución a posteriori")
 
 cords2.x <- c(lcb, seq(lcb, ucb, 0.01), ucb)
 cords2.y <- c(0, dnorm(seq(lcb, ucb, 0.01), mu_post, sd_post), 0)
